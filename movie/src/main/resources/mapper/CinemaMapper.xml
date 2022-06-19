@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.movie.movie.mapper.CinemaMapper">
+
+
+<!--
+     查询某个影院的排片-&#45;&#45;该方法转换json数据会很麻烦，我暂时未解决   start
+ -->
+    <resultMap id="cinema_movie_schedule" type="com.movie.movie.entity.Cinema">
+        <id property="cinemaId" column="cinema_id"></id>
+        <result property="cinemaName" column="cinema_name"></result>
+        <collection property="movies" ofType="com.movie.movie.entity.Movie">
+            <result column="movie_name" property="movieName"></result>
+        </collection>
+        <collection property="schedules" ofType="com.movie.movie.entity.Schedule">
+            <result column="schedule_begintime" property="scheduleBegintime"></result>
+            <result column="schedule_endtime" property="scheduleEndtime"></result>
+            <result column="price" property="price"></result>
+        </collection>
+    </resultMap>
+
+    <select id="getCinema_Movie" parameterType="Integer"  resultMap="cinema_movie_schedule">
+        select
+               cinema.cinema_id,
+               cinema.cinema_name,
+               movie.movie_name,
+               SCHEDULE.schedule_begintime,
+               SCHEDULE.schedule_endtime,
+               SCHEDULE.price
+        from
+            `cinema` inner join
+            `movie` inner join
+            `schedule`
+        WHERE
+            cinema.cinema_id = #{cinema_id}
+          AND  SCHEDULE.cinema_id=cinema.cinema_id
+          AND SCHEDULE.movie_id=movie.movie_id
+    </select>
+<!--
+     查询某个影院的排片-&#45;&#45;该方法转换json数据会很麻烦，我暂时未解决   end
+ -->
+</mapper>

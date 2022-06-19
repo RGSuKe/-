@@ -1,0 +1,29 @@
+server:
+    port: 89
+
+spring:
+    datasource:
+        druid:
+            driver-class-name: com.mysql.cj.jdbc.Driver
+            url: jdbc:mysql://localhost:3306/movie_buy
+            username: root
+            password: 2388725739skm
+    jackson:
+        date-format: yyyy-MM--dd HH:mm:ss
+        time-zone: GMT+8
+
+    #解决springboot和swagger版本不兼容
+    mvc:
+      pathmatch:
+          matching-strategy: ANT_PATH_MATCHER
+
+mybatis-plus:
+    configuration:
+        log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    global-config:
+        db-config:
+            #\u6570\u636E\u8868\u7684\u524D\u7F00
+            table-prefix:
+            id-type: auto
+
+    mapper-locations: classpath:mapper/*Mapper.xml

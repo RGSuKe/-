@@ -1,0 +1,1 @@
+select * from movie where movie_types like CONCAT('%','剧情','%')
