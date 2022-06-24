@@ -1,17 +1,17 @@
 <template>
 	 <div class="header">
 	        <div class="header_inside">
-	            <div class="logo">               
-				  <!-- <router-link to='HomePage'><a href="#"><img src="../img/logo名字.png"></a> </router-link> -->
-	            </div>
+	            <!-- <div class="logo">               
+				  <router-link to='HomePage'><a href="#"><img src="../img/logo名字.png"></a> </router-link>
+	            </div> --> 
 	            <div class="context">
 	                <ul>
 	                    <li><router-link  to='HomePage'>首页</router-link></li>
 	                    <li><router-link  to='Film'>电影</router-link></li>
-	                    <!-- <li><router-link  to='Rank'>排行</router-link></li>
-	                    <li><router-link  to='FilmPhoto'>剧照</router-link></li> -->
+	                    <li><router-link  to='Rank'>票房</router-link></li>
 						<li><router-link  to='Cinema'>影院</router-link></li>
-						<li><router-link  to='CinemaManage'>影院方主页</router-link></li>
+						<!-- <li><router-link  to='FilmPhoto'>111影院</router-link></li> -->
+						<li><router-link  to='CinemaManage'>管理员/影院方</router-link></li>
 	                </ul>
 					
 	            </div>
@@ -36,7 +36,7 @@
 				<div>
 					<ul >
 						
-						<el-button v-if="loginstatus === false"  @click="loginout()"  class="register"  size="large" round >退出</el-button>
+						<el-button v-if="loginstatus === false"  @click="loginout()"  class="register"  size="large" round >退出</el-button>&nbsp;&nbsp;
 						
 						<router-link to="/Register"  ><el-button class="register"  size="large" round>注册新用户</el-button></router-link>
 					</ul>
@@ -91,7 +91,7 @@
 
 </script>
 
-<style scope>
+<style scoped>
 	
 	li{
 		list-style: none
@@ -104,13 +104,12 @@
 		color: #409EFF;
 	}
 	.header{
-	    height: 50px;
-	    background-color: white;
+	    height: 50px;	    
 	    margin-top: -8px;
 	    border-bottom: 1px solid #ccc;
 	}
 	.header_inside{
-	    width: 1200px;
+	    width: 1400px;
 	    margin: 0 auto;
 	}
 	.header_inside div{

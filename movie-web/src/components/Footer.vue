@@ -23,6 +23,16 @@
 	a{
 		color: #000000;
 	}
+	li{
+		list-style: none
+	}
+	a{
+		text-decoration: none;
+		cursor: pointer;
+	}	
+	a:hover{
+		color: #409EFF;
+	}
 	.footer{
 		width: 700px;
 		margin: 0 auto;

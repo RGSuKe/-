@@ -184,7 +184,7 @@
 	//获取选中的
 	let multipleSelection = reactive([]);
 	//向请求发送的选中的
-	const deleteScheduleIds = reactive([]);
+	let deleteScheduleIds = reactive([]);
 	const handleSelectionChange = (val) =>{
 		console.log(val)
 		multipleSelection=val

@@ -1,177 +1,180 @@
 <template>
 	<Header />
-	<div class="content">
-		<el-tabs v-model="activeName" class="demo-tabs" tab-position="left"  @tab-click="handleClick">
-			<!-- 正在热映 -->
-		    <el-tab-pane  label="正在热映" name="first">
-				<!-- <img src="../img/step.png" class="imgmessage"/> -->
-				<div>
-					<ul class="mainlist">
-						<li class="partlist" @click="checkmovie_type('剧情')"><a>剧情</a></li>
-						<li class="partlist" @click="checkmovie_type('历史')"><a>历史</a></li>
-						<li class="partlist" @click="checkmovie_type('悬疑')"><a>悬疑</a></li>
-						<li class="partlist" @click="checkmovie_type('古装')"><a>古装</a></li>
-						<li class="partlist" @click="checkmovie_type('爱情')"><a>爱情</a></li>
-						<li class="partlist" @click="checkmovie_type('戏曲')"><a>戏曲</a></li>
-						<li class="partlist" @click="checkmovie_type('传记')"><a>传记</a></li>
-						<li class="partlist" @click="checkmovie_type('科幻')"><a>科幻</a></li>
-						<li class="partlist" @click="checkmovie_type('纪录')"><a>纪录</a></li>
-					</ul>
-				</div>	
-				<el-divider />
-					<!-- start -->
-					<div class="contentmessage1" v-for="m1 in movie_detail_1.data">
-						<div class="filmlist">
-							<img :src="m1.movieImg" class="imgsize"/>								
-						</div>						  
-						<el-button size="large" @click="dialogTableVisible = true;getMovie_Cinema_Schedule(m1.movieId)">立即购票</el-button>					  			
-						<!-- <el-button  @click="drawer = true;getMovie_Cinema_Schedule(m1.movieId)" size="large">查看详情</el-button> -->
-						<div class="filmmessage">
-							<div class="moviename">
-								{{m1.movieName}}
-							</div>
-							<div>
-								导演：{{m1.movieDirector}}
-							</div>
-							<div>
-								演员：{{m1.movieActor}}
-							</div>
-							<div>
-								类型：{{m1.movieTypes}}
-							</div>
-							<div>
-								上映时间：{{m1.movieUptime}}
-							</div>
-							<div>
-								时长：{{m1.movieDuration}}分钟
-							</div>
-							<div>
-								详情：{{m1.movieDetail}}
-							</div>
-						</div>
-						
-					</div>
-					 <el-divider />
-					<!--  end -->
-						  
-				</el-tab-pane>
-				
-				
-				
-				
-		<!-- 即将上映 -->		
-				<el-tab-pane label="即将上映" name="second">
+	<div class="mainall">
+		<div class="content">
+			<el-tabs v-model="activeName" class="demo-tabs" tab-position="left"  @tab-click="handleClick">
+				<!-- 正在热映 -->
+				<el-tab-pane  label="正在热映" name="first">
 					<!-- <img src="../img/step.png" class="imgmessage"/> -->
-					<ul class="mainlist">
-						<li class="partlist" @click="checkmovie_type('剧情')"><a>剧情</a></li>
-						<li class="partlist" @click="checkmovie_type('历史')"><a>历史</a></li>
-						<li class="partlist" @click="checkmovie_type('悬疑')"><a>悬疑</a></li>
-						<li class="partlist" @click="checkmovie_type('古装')"><a>古装</a></li>
-						<li class="partlist" @click="checkmovie_type('爱情')"><a>爱情</a></li>
-						<li class="partlist" @click="checkmovie_type('戏曲')"><a>戏曲</a></li>
-						<li class="partlist" @click="checkmovie_type('传记')"><a>传记</a></li>
-						<li class="partlist" @click="checkmovie_type('科幻')"><a>科幻</a></li>
-						<li class="partlist" @click="checkmovie_type('纪录')"><a>纪录</a></li>
-					</ul>
-					<el-divider />	
-						<!--  start -->
-						<div class="contentmessage1" v-for="m0 in movie_detail_0.data">
-						  
-							  <div class="filmlist">
-							  	<img :src="m0.movieImg" class="imgsize"/>				
-							  </div>						  
-							  <el-button size="large" @click="dialogTableVisible = true;getMovie_Cinema_Schedule(m0.movieId)">立即购票</el-button>					  			
-							 <!-- <el-button size="large" @click="drawer = true;getMovie_Cinema_Schedule(m0.movieId)" >查看详情</el-button> -->
-							  <div class="filmmessage">
-							  	<div class="moviename">
-							  		{{m0.movieName}}
-							  	</div>
-							  	<div>
-							  		导演：{{m0.movieDirector}}
-							  	</div>
-							  	<div>
-							  		演员：{{m0.movieActor}}
-							  	</div>
-							  	<div>
-							  		类型：{{m0.movieTypes}}
-							  	</div>
-							  	<div>
-							  		上映时间：{{m0.movieUptime}}
-							  	</div>
-							  	<div>
-							  		时长：{{m0.movieDuration}}分钟
-							  	</div>
-							  	<div>
-							  		详情：{{m0.movieDetail}}
-							  	</div>
-							  </div>						
+					<div>
+						<ul class="mainlist">
+							<li class="partlist" @click="getMovie()"><a>全部</a></li>
+							<li class="partlist" @click="checkmovie_type('剧情')"><a>剧情</a></li>
+							<li class="partlist" @click="checkmovie_type('历史')"><a>历史</a></li>
+							<li class="partlist" @click="checkmovie_type('悬疑')"><a>悬疑</a></li>
+							<li class="partlist" @click="checkmovie_type('古装')"><a>古装</a></li>
+							<li class="partlist" @click="checkmovie_type('爱情')"><a>爱情</a></li>
+							<li class="partlist" @click="checkmovie_type('戏曲')"><a>戏曲</a></li>
+							<li class="partlist" @click="checkmovie_type('传记')"><a>传记</a></li>
+							<li class="partlist" @click="checkmovie_type('科幻')"><a>科幻</a></li>
+							<li class="partlist" @click="checkmovie_type('纪录')"><a>纪录</a></li>
+						</ul>
+					</div>	
+					<el-divider />
+						<!-- start -->
+						<div class="contentmessage1" v-for="m1 in movie_detail_1.data">
+							<div class="filmlist">
+								<img :src="m1.movieImg" class="imgsize"/>								
+							</div>						  
+							<el-button size="large" @click="dialogTableVisible = true;getMovie_Cinema_Schedule(m1.movieId)">立即购票</el-button>					  			
+							<!-- <el-button  @click="drawer = true;getMovie_Cinema_Schedule(m1.movieId)" size="large">查看详情</el-button> -->
+							<div class="filmmessage">
+								<div class="moviename">
+									{{m1.movieName}}
+								</div>
+								<div>
+									导演：{{m1.movieDirector}}
+								</div>
+								<div>
+									演员：{{m1.movieActor}}
+								</div>
+								<div>
+									类型：{{m1.movieTypes}}
+								</div>
+								<div>
+									上映时间：{{m1.movieUptime}}
+								</div>
+								<div>
+									时长：{{m1.movieDuration}}分钟
+								</div>
+								<div>
+									详情：{{m1.movieDetail}}
+								</div>
+							</div>
+							
 						</div>
-						<!--  end -->		
-				</el-tab-pane>
-		    
-		  </el-tabs>
-	</div>
-	
-	<!-- 点击查看详情弹出测边框 start -->
-	<el-drawer v-model="drawer"  :with-header="false" >
-		<div>
-			<img :src="movie_cinema_schedule.data[0].movieImg" class="imgsize"/>
-			<h2>片名：{{movie_cinema_schedule.data[0].movieName}}</h2><br>
-			
-			<div v-for="mcs in movie_cinema_schedule.data">
-				<h2>影院：{{mcs.cinemaName}}</h2><br>
-			 	票价：{{mcs.price}} 元<br>
-				时间: {{mcs.scheduleBegintime}}-{{mcs.scheduleEndtime}}<br>
-			 </div>
+						 <el-divider />
+						<!--  end -->
+							  
+					</el-tab-pane>
+					
+					
+					
+					
+			<!-- 即将上映 -->		
+					<el-tab-pane label="即将上映" name="second">
+						<!-- <img src="../img/step.png" class="imgmessage"/> -->
+						<ul class="mainlist">
+							<li class="partlist" @click="getMovie()"><a>全部</a></li>
+							<li class="partlist" @click="checkmovie_type('剧情')"><a>剧情</a></li>
+							<li class="partlist" @click="checkmovie_type('历史')"><a>历史</a></li>
+							<li class="partlist" @click="checkmovie_type('悬疑')"><a>悬疑</a></li>
+							<li class="partlist" @click="checkmovie_type('古装')"><a>古装</a></li>
+							<li class="partlist" @click="checkmovie_type('爱情')"><a>爱情</a></li>
+							<li class="partlist" @click="checkmovie_type('戏曲')"><a>戏曲</a></li>
+							<li class="partlist" @click="checkmovie_type('传记')"><a>传记</a></li>
+							<li class="partlist" @click="checkmovie_type('科幻')"><a>科幻</a></li>
+							<li class="partlist" @click="checkmovie_type('纪录')"><a>纪录</a></li>
+						</ul>
+						<el-divider />	
+							<!--  start -->
+							<div class="contentmessage1" v-for="m0 in movie_detail_0.data">
+							  
+								  <div class="filmlist">
+									<img :src="m0.movieImg" class="imgsize"/>				
+								  </div>						  
+								  <el-button size="large" @click="dialogTableVisible = true;getMovie_Cinema_Schedule(m0.movieId)">立即购票</el-button>					  			
+								 <!-- <el-button size="large" @click="drawer = true;getMovie_Cinema_Schedule(m0.movieId)" >查看详情</el-button> -->
+								  <div class="filmmessage">
+									<div class="moviename">
+										{{m0.movieName}}
+									</div>
+									<div>
+										导演：{{m0.movieDirector}}
+									</div>
+									<div>
+										演员：{{m0.movieActor}}
+									</div>
+									<div>
+										类型：{{m0.movieTypes}}
+									</div>
+									<div>
+										上映时间：{{m0.movieUptime}}
+									</div>
+									<div>
+										时长：{{m0.movieDuration}}分钟
+									</div>
+									<div>
+										详情：{{m0.movieDetail}}
+									</div>
+								  </div>						
+							</div>
+							<!--  end -->		
+					</el-tab-pane>
+				
+			  </el-tabs>
 		</div>
 		
-	</el-drawer>
-	<!-- 点击查看详情弹出测边框 end -->
-	 
-	
-	<!-- 选影院 start -->
-	 <!-- <el-dialog v-model="visible" :show-close="false">
-	   
-	  </el-dialog> -->
-	   <el-dialog v-model="dialogTableVisible" title="购票安排">
-	      <el-table :data="movie_cinema_schedule.data" >
-			<el-table-column  type="index" label="序号" width="100" align="center"></el-table-column>
-	        <el-table-column property="cinemaName" label="影院" width="150" />
-	        <el-table-column property="scheduleBegintime" label="开始时间" width="200" />
-			<el-table-column property="scheduleEndtime" label="结束时间" width="200" />
-	        <el-table-column property="price" label="票价" />
-			<el-table-column > 
-			<template v-slot="scope">
-				<el-button @click="ChooseSeat = true;select(scope.$index);getSeat(scope.row.scheduleId)">选择</el-button>
-				<!-- <el-button @click="ChooseSeat = true;select(scope.row.scheduleId)">选择</el-button> -->
-			 </template>
-			</el-table-column>
-	      </el-table>
-		  <span v-if="dialogTableVisibleAlert">
-			  <strong >该片暂时无安排，请选择其他！</strong>
-		  </span>
+		<!-- 点击查看详情弹出测边框 start -->
+		<el-drawer v-model="drawer"  :with-header="false" draggable>
+			<div>
+				<img :src="movie_cinema_schedule.data[0].movieImg" class="imgsize"/>
+				<h2>片名：{{movie_cinema_schedule.data[0].movieName}}</h2><br>
+				
+				<div v-for="mcs in movie_cinema_schedule.data">
+					<h2>影院：{{mcs.cinemaName}}</h2><br>
+					票价：{{mcs.price}} 元<br>
+					时间: {{mcs.scheduleBegintime}}-{{mcs.scheduleEndtime}}<br>
+				 </div>
+			</div>
+			
+		</el-drawer>
+		<!-- 点击查看详情弹出测边框 end -->
+		 
+		
+		<!-- 选影院 start -->
+		 <!-- <el-dialog v-model="visible" :show-close="false">
+		   
+		  </el-dialog> -->
+		   <el-dialog v-model="dialogTableVisible" title="购票安排" draggable>
+			  <el-table :data="movie_cinema_schedule.data" >
+				<el-table-column  type="index" label="序号" width="100" align="center"></el-table-column>
+				<el-table-column property="cinemaName" label="影院" width="150" />
+				<el-table-column property="scheduleBegintime" label="开始时间" width="200" />
+				<el-table-column property="scheduleEndtime" label="结束时间" width="200" />
+				<el-table-column property="price" label="票价" />
+				<el-table-column > 
+				<template v-slot="scope">
+					<el-button @click="ChooseSeat = true;select(scope.$index);getSeat(scope.row.scheduleId)">选择</el-button>
+					<!-- <el-button @click="ChooseSeat = true;select(scope.row.scheduleId)">选择</el-button> -->
+				 </template>
+				</el-table-column>
+			  </el-table>
+			  <span v-if="dialogTableVisibleAlert">
+				  <strong >该片暂时无安排，请选择其他！</strong>
+			  </span>
+			  
+			</el-dialog>
+		<!-- 选影院 end -->
+		
+		<!-- 选位置 start -->
+		<el-dialog v-model="ChooseSeat" title="选取座位">
+		  <div class="seatstyle">
+			 <el-checkbox-group v-model="checkboxGroup1" @change="changecheckbox">
+				<el-checkbox border  v-for="s in seat.data" :label="s.seatId" :disabled="s.seatStatus === 1">
+					{{s.seatRow}}-{{s.seatCol}}
+				</el-checkbox> 
+			 </el-checkbox-group>
+		  </div>
 		  
-	    </el-dialog>
-	<!-- 选影院 end -->
-	
-	<!-- 选位置 start -->
-	<el-dialog v-model="ChooseSeat" title="选取座位">
-	  <div class="seatstyle">
-		 <el-checkbox-group v-model="checkboxGroup1" @change="changecheckbox">
-			<el-checkbox border  v-for="s in seat.data" :label="s.seatId" :disabled="s.seatStatus === 1">
-				{{s.seatRow}}-{{s.seatCol}}
-			</el-checkbox> 
-		 </el-checkbox-group>
-	  </div>
-	  
-		 <p>总价：￥ {{totalFee}} </p>
-		 <el-button @click="buytickets()">购买</el-button>
-		 
-		 
-	 </el-dialog>
-	<!-- 选位置 start -->
-	
-	
+			 <p>总价：￥ {{totalFee}} </p>
+			 <el-button @click="buytickets()">购买</el-button>
+			 
+			 
+		 </el-dialog>
+		<!-- 选位置 start -->
+		
+	</div>
 	<Footer />
 </template>
 
@@ -217,6 +220,9 @@
 	// })
 	//保存影片信息
 	//存取  未上映
+	
+	//接收main.js的axios对象
+	const $axios = inject('$axios');
 	const movie_detail_0 = reactive({
 		data:[]
 	});
@@ -224,13 +230,12 @@
 	const movie_detail_1 = reactive({
 		data:[]
 	});
-	//接收main.js的axios对象
-	const $axios = inject('$axios');
+	
 	
 	$axios.get('http://localhost:89/movie').then((resp) => {
 		// movie_detail.data = resp.data.data;
-		for(var i = 0; i < resp.data.data.length; i++){
-			// console.log(resp.data.data[i])
+		console.log(resp.data.data[0]);
+		for(var i = 0; i < resp.data.data.length; i++){		
 			if(resp.data.data[i].movieStatus == 0){
 				movie_detail_0.data.push(resp.data.data[i]) ;			
 			}else if(resp.data.data[i].movieStatus === 1){
@@ -244,6 +249,28 @@
 	});
 	
 	
+	//查询全部
+	const getMovie = () =>{
+		$axios.get('http://localhost:89/movie').then((resp) => {
+			// console.log(movietype);
+			//先清空上面存入的数据，不然循环获取数据时，存取数据会重复
+			movie_detail_0.data=[];
+			movie_detail_1.data=[];
+			console.log(resp.data.data[0]);
+			for(var i = 0; i < resp.data.data.length; i++){		
+				if(resp.data.data[i].movieStatus == 0){
+					movie_detail_0.data.push(resp.data.data[i]) ;			
+				}else if(resp.data.data[i].movieStatus === 1){
+					movie_detail_1.data.push(resp.data.data[i]) ;				
+				}
+			}
+			console.log("未上映",movie_detail_0.data);
+			console.log("已上映",movie_detail_1.data);
+		}).catch((err) => {
+			console.log(err);
+		});
+	}
+
 	//点击某种类型 start
 	const checkmovie_type = (movietype) =>{
 		$axios.get('http://localhost:89/movie/movie_types/'+movietype).then((resp) => {
@@ -271,6 +298,8 @@
 	/**
 	 * 获取影片信息 end
 	 */
+	
+	
 	
 	/**
 	 * 获取该电影哪个影院有 start
@@ -344,6 +373,7 @@
 		userId: "",
 		scheduleId: "",
 		seatId: [],
+		orderPrice: '',
 		orderCreatetime: "",
 	});
 	//获取计划的某行的序号
@@ -382,6 +412,8 @@
 		orderMessage.userId = localStorage.getItem("userId");
 		orderMessage.scheduleId = movie_cinema_schedule.data[Index.value].scheduleId;
 		orderMessage.seatId = checkboxGroup1;
+		orderMessage.orderPrice = movie_cinema_schedule.data[Index.value].price;
+		console.log("提交：", orderMessage);
 		//如果没有选座位，则不发送请求
 		if(orderMessage.seatId != null){
 			$axios.post('http://localhost:89/order1/addone',orderMessage).then((resp) => {
@@ -410,6 +442,16 @@
 </script>
 
 <style scoped>
+	li{
+		list-style: none
+	}
+	a{
+		text-decoration: none;
+		cursor: pointer;
+	}	
+	a:hover{
+		color: #409EFF;
+	}
 	/* elementuiplus */
 	.el-button--text {
 	  margin-right: 15px;
@@ -434,7 +476,7 @@
 	  font-weight: 600;
 	}
 	.content{
-		margin-left: 18% ;
+		margin-left: 19% ;
 		margin-top: 40px;
 		margin-right: 18%;
 	}
@@ -482,6 +524,7 @@
 		height: 270px;
 		border-radius: 8px 8px 8px 8px;
 	}
+
 /* 	.seatstyle{
 		
 	}
@@ -490,7 +533,7 @@
 	}
 	.seatstyle > table > tr > td {
 		vertical-align: middle;
-	} */
-	
+	}
+	 */
 	
 </style>

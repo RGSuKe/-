@@ -38,8 +38,8 @@
 </template>
 
 <script setup>
-	import Header from '../../components/Header.vue'
-	import Footer from '../../components/Footer.vue'
+	import Header from '../components/Header.vue'
+	import Footer from '../components/Footer.vue'
 	import {reactive,ref } from 'vue'
 	
 	/* 走马灯 */

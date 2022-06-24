@@ -368,7 +368,7 @@
 	//获取选中的
 	let multipleSelection = reactive([]);
 	//向请求发送的选中的movieId的数组
-	const deleteMovieIds = reactive([]);
+	let deleteMovieIds = reactive([]);
 	const handleSelectionChange = (val) =>{
 		console.log(val)
 		multipleSelection=val

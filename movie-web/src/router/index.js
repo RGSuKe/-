@@ -27,11 +27,12 @@ const routes = [
 	// { path: '/Register', name: 'Register', component: () => import('../view/Register.vue') },
 	// { path: '/Cinema', name: 'Cinema', component: () => import('../view/Cinema.vue') },
 		
-	{ path: '/HomePage', name: 'HomePage', component: () => import('../view/user/HomePage.vue')},
-	{ path: '/Film', name: 'Film', component: () =>import('../view/user/Film.vue')},
+	{ path: '/HomePage', name: 'HomePage', component: () => import('../view/user/HomePage.vue') },
+	{ path: '/Film', name: 'Film', component: () =>import('../view/user/Film.vue') },
 	{ path: '/Login', name: 'Login', component: () => import('../view/user/Login.vue') },
 	{ path: '/Register', name: 'Register', component: () => import('../view/user/Register.vue') },
 	{ path: '/Cinema', name: 'Cinema', component: () => import('../view/user/Cinema.vue') },
+	{ path: '/Rank', name: 'Rank', component: () => import('../view/user/Rank.vue') },
 	
 	//通用组件
 	// { path: '/AboutMe', name: 'AboutMe', component: () => import('../view/AboutMe.vue') },

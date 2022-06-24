@@ -98,7 +98,7 @@
 	 <!-- <el-dialog v-model="visible" :show-close="false">
 	   
 	  </el-dialog> -->
-	   <el-dialog v-model="dialogTableVisible" title="购票安排">
+	   <el-dialog v-model="dialogTableVisible" title="购票安排" draggable>
 	      <el-table :data="movie_cinema_schedule.data" >
 			<el-table-column  type="index" label="序号" width="100" align="center"></el-table-column>
 	        <el-table-column property="cinemaName" label="影院" width="150" />
@@ -120,7 +120,7 @@
 	<!-- 选影院 end -->
 	
 	<!-- 选位置 start -->
-	<el-dialog v-model="ChooseSeat" title="选取座位">
+	<el-dialog v-model="ChooseSeat" title="选取座位" draggable>
 	  <div class="seatstyle">
 		 <el-checkbox-group v-model="checkboxGroup1" @change="changecheckbox">
 			<el-checkbox border  v-for="s in seat.data" :label="s.seatId" :disabled="s.seatStatus === 1">

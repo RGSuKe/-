@@ -91,7 +91,7 @@
 					  ElMessageBox.alert(resp.data.msg);
 				}else{
 					ElMessage({
-						message: '注册成功，3秒后将为您转去登录窗口',
+						message: '注册成功，2秒后将为您转去登录窗口',
 						type: 'success',
 					});
 					 
@@ -99,7 +99,7 @@
 							//需要延迟的代码 :3秒后延迟跳转到首页，可以加提示什么的					 
 							router.push('Login');
 					        //延迟时间：3秒
-					    },3000);
+					    }, 2000);
 				}
 				
 			});
