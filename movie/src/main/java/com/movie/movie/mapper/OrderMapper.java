@@ -23,7 +23,7 @@ public interface OrderMapper extends BaseMapper<Order1> {
 
 
     @Select("select order1.order_id, USER.username, SCHEDULE.schedule_id, cinema.cinema_name, movie.movie_name, SCHEDULE.schedule_begintime, SCHEDULE.schedule_endtime,\n" +
-            "seat.seat_id, seat.seat_row, seat.seat_col, seat.seat_status, order1.order_createtime, order1.order_status \n" +
+            "seat.seat_id, seat.seat_row, seat.seat_col, seat.seat_status, order1.order_price, order1.order_createtime, order1.order_status \n" +
             "FROM USER, order1, SCHEDULE, seat, movie, cinema \n" +
             "WHERE\n" +
             "\tusername LIKE CONCAT ('%', #{username} ,'%')\n"+
@@ -33,4 +33,19 @@ public interface OrderMapper extends BaseMapper<Order1> {
             "\tAND SCHEDULE.movie_id = movie.movie_id \n" +
             "\tAND cinema.cinema_id = SCHEDULE.cinema_id \n" )
     IPage<OrderVo2> getPage(IPage<OrderVo2> iPage, String username);
+
+
+    @Select("SELECT\n" +
+            "\tmovie.movie_id,\n" +
+            "\tmovie.movie_name,\n" +
+            "\torder1.order_price,\n" +
+            "\torder1.order_status\n" +
+            "FROM\n" +
+            "\tmovie,\n" +
+            "\tSCHEDULE,\n" +
+            "\torder1 \n" +
+            "WHERE\n" +
+            "\tSCHEDULE.schedule_id = order1.schedule_id \n" +
+            "\tAND movie.movie_id = SCHEDULE.movie_id")
+    List<OrderVo2> selectPriceByScheduleAndMovie();
 }

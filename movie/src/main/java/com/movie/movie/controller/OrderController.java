@@ -1,10 +1,7 @@
 package com.movie.movie.controller;
 
-import cn.hutool.db.sql.Order;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.movie.movie.controller.util.R;
-import com.movie.movie.entity.Movie;
-import com.movie.movie.entity.Order1;
 import com.movie.movie.entity.ViewObject.OrderVo;
 import com.movie.movie.entity.ViewObject.OrderVo2;
 import com.movie.movie.service.*;
@@ -78,4 +75,13 @@ public class OrderController {
     public R deleteOrder(@RequestBody List<Integer> ids){
         return new R(true, orderService.removeByIds(ids));
     }
+
+    /**
+     * 统计票房--查询全部订单
+     */
+    @GetMapping("/getPrice")
+    public R countBoxOoffice(){
+        return new R(true, orderService.selectPriceByScheduleAndMovie());
+    }
+
 }

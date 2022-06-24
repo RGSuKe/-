@@ -25,4 +25,6 @@ public interface IOrderService extends IService<Order1> {
     Boolean cancelOrder(List<OrderVo2> ids);
 
     Boolean finishOrder(List<OrderVo2> ids);
+
+    List<OrderVo2> selectPriceByScheduleAndMovie();
 }

@@ -60,6 +60,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order1> implement
             order1.setUserId(orderVo.getUserId());
             order1.setOrderCreatetime(LocalDateTime.now());
             order1.setScheduleId(orderVo.getScheduleId());
+            order1.setOrderPrice(orderVo.getOrderPrice());
             order1.setOrderStatus(2);
             /**
              从前端传回来的实体中获取选中 座位的id
@@ -146,6 +147,12 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order1> implement
             count = count + 1;
         }
         return count;
+    }
+
+
+    @Override
+    public List<OrderVo2> selectPriceByScheduleAndMovie() {
+        return orderMapper.selectPriceByScheduleAndMovie();
     }
 
 }

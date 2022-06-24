@@ -24,7 +24,7 @@ public class TokenUtils {
      */
     public static String getToken(String userId,String sign){
         return  JWT.create().withAudience(userId)//将user id保存到token里面，作为载荷
-                .withExpiresAt(DateUtil.offsetHour(new Date(),6))//2小时后token国企
+                .withExpiresAt(DateUtil.offsetHour(new Date(),6))//6小时后token过期
                 .sign(Algorithm.HMAC256(sign));//以password作为token的密钥
     }
 

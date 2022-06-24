@@ -1,14 +1,12 @@
 package com.movie.movie.controller;
 
-import com.baomidou.mybatisplus.annotation.TableField;
+
 import com.movie.movie.controller.util.R;
-import com.movie.movie.entity.Cinema;
 import com.movie.movie.entity.Schedule;
-import com.movie.movie.entity.Seat;
-import com.movie.movie.entity.ViewObject.Schedule_Cinema_Movie;
 import com.movie.movie.service.IScheduleService;
 import com.movie.movie.service.ISeatService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,12 +31,14 @@ public class ScheduleController {
     @Autowired
     private ISeatService seatService;
 
+
+
     /**
      * 影院方查询计划
      */
     @GetMapping("/getSchedule/{CinemaName}")
     public R getCinema(@PathVariable String CinemaName){
-        return new R(true, scheduleService.getSchedule_Cinema_Movie(CinemaName));
+       return new R(true, scheduleService.getSchedule_Cinema_Movie(CinemaName));
     }
 
     /**
