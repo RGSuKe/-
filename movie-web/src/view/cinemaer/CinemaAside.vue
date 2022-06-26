@@ -9,17 +9,17 @@
    
   >
   
-	  <el-menu-item index="ScheduleList"> 
+	  <el-menu-item index="/CinemaManage/ScheduleList"> 
 		 <el-icon><Notebook /></el-icon>
 		 <span >计划管理</span>
 	  </el-menu-item>
 	  
-	  <el-menu-item index="MovieList">
+	  <el-menu-item index="/CinemaManage/MovieList">
 		 <el-icon><Film /></el-icon>
 		 <span >电影管理</span>
 	  </el-menu-item>
 	  
-		<el-menu-item index="BuyerList">
+		<el-menu-item index="/CinemaManage/BuyerList">
 		 <el-icon><UserFilled /></el-icon>
 		 <span >已购人数</span>
 		</el-menu-item>

@@ -32,6 +32,7 @@ const routes = [
 	{ path: '/Login', name: 'Login', component: () => import('../view/user/Login.vue') },
 	{ path: '/Register', name: 'Register', component: () => import('../view/user/Register.vue') },
 	{ path: '/Cinema', name: 'Cinema', component: () => import('../view/user/Cinema.vue') },
+	{ path: '/MyOrder', name: 'MyOrder', component: () => import('../view/user/MyOrder.vue') },
 	{ path: '/Rank', name: 'Rank', component: () => import('../view/user/Rank.vue') },
 	
 	//通用组件
@@ -48,12 +49,12 @@ const routes = [
 	
 	//影院方
 	{ path: '/CinemaLogin', name: 'CinemaLogin', component: () => import('../view/cinemaer/CinemaLogin.vue') },
-	{ path: '/CinemaManage', name: 'CinemaManage', component: () => import('../view/cinemaer/CinemaManage.vue'),
+	{ path: '/CinemaManage', name: 'CinemaManage', component: () => import('../view/cinemaer/CinemaManage.vue'), 
 		children: [
 			{path: '/CinemaAside', name: 'CinemaAside', component: () => import('../view/cinemaer/CinemaAside.vue'),},
-			{path: '/ScheduleList', name:'ScheduleList', component: () => import('../view/cinemaer/ScheduleList.vue'),},
-			{path: '/MovieList', name: 'MovieList', component: () => import('../view/cinemaer/MovieList.vue'),},
-			{path: '/BuyerList', name: 'BuyerList', component: () => import('../view/cinemaer/BuyerList.vue'),},
+			{path: '/CinemaManage/ScheduleList', name:'ScheduleList', component: () => import('../view/cinemaer/ScheduleList.vue'),},
+			{path: '/CinemaManage/MovieList', name: 'MovieList', component: () => import('../view/cinemaer/MovieList.vue'),},
+			{path: '/CinemaManage/BuyerList', name: 'BuyerList', component: () => import('../view/cinemaer/BuyerList.vue'),},
 		],
 	 },
 	

@@ -81,7 +81,7 @@
 					 });	
 					 setTimeout(()=>{
 					 		//需要延迟的代码 :2秒后延迟跳转到首页，可以加提示什么的				 
-					 		router.push('CinemaManage');
+					 		router.push('/CinemaManage');
 					         //延迟时间：3秒
 					     },2000);
 				}else{

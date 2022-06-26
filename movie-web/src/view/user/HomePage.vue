@@ -380,6 +380,7 @@
 		orderMessage.userId = localStorage.getItem("userId");
 		orderMessage.scheduleId = movie_cinema_schedule.data[Index.value].scheduleId;
 		orderMessage.seatId = checkboxGroup1;
+		orderMessage.orderPrice = movie_cinema_schedule.data[Index.value].price;
 		//如果没有选座位，则不发送请求
 		if(orderMessage.seatId != null){		
 			$axios.post('http://localhost:89/order1/addone',orderMessage).then((resp) => {

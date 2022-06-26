@@ -11,7 +11,7 @@
 	                    <li><router-link  to='Rank'>票房</router-link></li>
 						<li><router-link  to='Cinema'>影院</router-link></li>
 						<!-- <li><router-link  to='FilmPhoto'>111影院</router-link></li> -->
-						<li><router-link  to='CinemaManage'>管理员/影院方</router-link></li>
+						<li><a  @click="manage">管理员/影院方</a></li>
 	                </ul>
 					
 	            </div>
@@ -28,17 +28,31 @@
 					<ul class="login" >
 						<!-- <a href="https://www.baidu.com/">登录</a> -->
 						<router-link to="/Login"   v-show="loginstatus === true"><el-button class="register"  size="large" round>请登录</el-button></router-link>
-						<div v-if="loginstatus === false">欢迎您，<strong>{{username}}</strong></div>
+						<!-- <div v-if="loginstatus === false">欢迎您，<strong>{{username}}</strong></div> -->
 						
+						 <el-dropdown v-if="loginstatus === false">
+						      <el-button  round class="welcomeButton">
+								  <div v-if="loginstatus === false">
+									  欢迎您，<strong>{{username}}</strong>
+									   <el-icon class="el-icon--right"><arrow-down /></el-icon>
+								  </div>
+						      </el-button>
+						      <template #dropdown>
+						        <el-dropdown-menu>
+						         <router-link to="/MyOrder" > <el-dropdown-item >我的订单</el-dropdown-item></router-link>
+						        </el-dropdown-menu>
+						      </template>
+						 </el-dropdown>
+							
 					</ul>
 				</div>
 				
 				<div>
 					<ul >
 						
-						<el-button v-if="loginstatus === false"  @click="loginout()"  class="register"  size="large" round >退出</el-button>&nbsp;&nbsp;
+						<el-button v-if="loginstatus === false"  @click="loginout()"  class="register"   round >退出</el-button>&nbsp;&nbsp;
 						
-						<router-link to="/Register"  ><el-button class="register"  size="large" round>注册新用户</el-button></router-link>
+						<router-link to="/Register"  ><el-button class="register"   round>注册新用户</el-button></router-link>
 					</ul>
 				</div>
 	        </div>
@@ -48,7 +62,7 @@
 </template>
 
 <script lang="ts" setup>
-	import { Delete, Edit, Search, Share, Upload } from '@element-plus/icons-vue'
+	import { Delete, Edit, Search, Share, Upload,ArrowDown } from '@element-plus/icons-vue'
 	import { ref , reactive, watch, onMounted } from 'vue'
 	import { useRouter } from 'vue-router'
 	import {  ElMessage, ElMessageBox } from 'element-plus'
@@ -79,7 +93,7 @@
 		});	
 		setTimeout(()=>{
 				//需要延迟的代码 :2秒后延迟跳转到首页，可以加提示什么的					 
-				router.push('Login');
+				router.push('/Login');
 		        //延迟时间：2秒
 		    },2000);		 
 		 // localStorage.removeItem("username");
@@ -87,7 +101,13 @@
 		 // localStorage.removeItem("token");	 	 
 	}
 	
-	
+	const manage = () =>{
+		if(localStorage.getItem("cinemaId") != null){
+			router.push('/CinemaManage');
+		}else{
+			router.push('/CinemaLogin');
+		}
+	}
 
 </script>
 
@@ -147,6 +167,8 @@
 	.register a{
 		text-decoration: none;
 	}
-	
+	.welcomeButton{
+		margin-top: -8px;
+	}
 </style> 
 

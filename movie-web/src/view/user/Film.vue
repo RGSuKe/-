@@ -477,11 +477,11 @@
 	}
 	.content{
 		margin-left: 19% ;
-		margin-top: 40px;
+		margin-top: 20px;
 		margin-right: 18%;
 	}
 	.mainlist{
-		width: 600px;
+		width: 500px;
 		height: 100px;
 	}
 	.partlist{
@@ -496,7 +496,7 @@
 	.contentmessage1{
 	/* 	border: 1px solid #000000; */
 		border-radius: 5px;
-		width: 1020px;
+		width: 1000px;
 		height: 400px;
 		margin-bottom: 100px;
 		margin-left: 20px;

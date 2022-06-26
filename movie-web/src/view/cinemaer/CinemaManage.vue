@@ -41,7 +41,7 @@
 	const backUser = () =>{
 		setTimeout(()=>{
 				//需要延迟的代码 :2秒后延迟跳转到首页，可以加提示什么的				 
-				router.push('HomePage');
+				router.push('/HomePage');
 		        //延迟时间：3秒
 		    },500);
 	}
