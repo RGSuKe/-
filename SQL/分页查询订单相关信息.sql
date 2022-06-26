@@ -12,7 +12,7 @@ FROM
 	`schedule`,
 	`order1`
 WHERE
-	order1.user_id = 4
+	username like CONCAT('%','b','%')
 	AND USER.user_id = ORDER1.user_id 
 	AND seat.seat_id = order1.seat_id
 	AND schedule.schedule_id = ORDER1.schedule_id
