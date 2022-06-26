@@ -27,6 +27,15 @@ public class OrderController {
     @Autowired
     private IOrderService orderService;
 
+
+    /**
+     * 用户查询自己的订单
+     */
+    @GetMapping("/myOrder/{userId}")
+    public R myOrder(@PathVariable Integer userId){
+       return new R(true, orderService.selectMyOrder(userId));
+    }
+
     /**
      * 添加订单
      * @param orderVo
@@ -55,7 +64,7 @@ public class OrderController {
      */
     @PostMapping("/canceOrder")
     public R canceOrder(@RequestBody List<OrderVo2> orderVo2){
-      return new R(true, orderService.cancelOrder(orderVo2));
+        return new R(true, orderService.cancelOrder(orderVo2));
     }
 
 
@@ -83,5 +92,6 @@ public class OrderController {
     public R countBoxOoffice(){
         return new R(true, orderService.selectPriceByScheduleAndMovie());
     }
+
 
 }

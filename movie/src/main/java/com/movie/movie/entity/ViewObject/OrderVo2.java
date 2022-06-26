@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 public class OrderVo2 {
 
     private  Integer orderId;
+    private Integer userId;
     private  String  username;
     private  Integer scheduleId;
     private  String cinemaName;

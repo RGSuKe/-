@@ -55,6 +55,9 @@ public class CinemaController {
     public R getByIdone(@PathVariable Integer id){
         System.out.println("请求了按Id查询："+id);
 
+        //直接mysql，不使用redis
+//        return new R(true, cinemaService.getById(id));
+
         //StringRedisTemplate提供的
         String cinemaRedis = stringRedisTemplate.opsForValue().get("Cinema_cinemaId:"+id.toString());
         if (StrUtil.isNotBlank(cinemaRedis)) {
@@ -94,8 +97,7 @@ public class CinemaController {
 //            return new R(true,cinemaMysql);
 //        }
 
-            //直接mysql，不使用redis
-//        return new R(true, cinemaService.getById(id));
+
     }
 
     /**

@@ -6,7 +6,6 @@ import com.movie.movie.entity.Schedule;
 import com.movie.movie.service.IScheduleService;
 import com.movie.movie.service.ISeatService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 

@@ -27,9 +27,9 @@ public class InterceptorConfig implements WebMvcConfigurer{
         List<String> cinemaer = new ArrayList<>();
         cinemaer.add("/CinemaLogin");
         cinemaer.add("/CinemaManage");
-        cinemaer.add("/ScheduleList");
-        cinemaer.add("/MovieList");
-        cinemaer.add("/BuyerList");
+        cinemaer.add("/CinemaManage/ScheduleList");
+        cinemaer.add("/CinemaManage/MovieList");
+        cinemaer.add("/CinemaManage/BuyerList");
 
         registry.addInterceptor(jwtInterceptor())
                 .addPathPatterns("/**")// 拦截所有请求，通过判断是否有 @LoginRequired 注解 决定是否需要登录

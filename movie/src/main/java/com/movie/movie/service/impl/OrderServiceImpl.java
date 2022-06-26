@@ -149,10 +149,20 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order1> implement
         return count;
     }
 
-
+    /**
+     * 统计票房--查询全部订单
+     */
     @Override
     public List<OrderVo2> selectPriceByScheduleAndMovie() {
         return orderMapper.selectPriceByScheduleAndMovie();
+    }
+
+    /**
+     * 根据userId查询订单
+     */
+    @Override
+    public List<OrderVo2> selectMyOrder(Integer userId) {
+        return orderMapper.selectMyOrder(userId);
     }
 
 }

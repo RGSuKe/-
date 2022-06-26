@@ -40,6 +40,10 @@ public class MovieController {
      */
     @GetMapping
     public R getAll(){
+        //直接使用mysql
+//       return new R(true,movieService.list());
+
+        //使用mysql+redis
         String movieRedis = stringRedisTemplate.opsForValue().get("Movie_all");
         if (StrUtil.isNotBlank(movieRedis)){
             System.out.println("请求了redis--------------------Movie-getAll");
@@ -51,12 +55,11 @@ public class MovieController {
             if (movieListMysql == null){
                 return null;
             }
-            stringRedisTemplate.opsForValue().set("Movie_all", JSONUtil.toJsonStr(movieListMysql), 5, TimeUnit.MINUTES);
+            stringRedisTemplate.opsForValue().set("Movie_all", JSONUtil.toJsonStr(movieListMysql), 2, TimeUnit.MINUTES);
             System.out.println("请求了mysql--------------------Movie-getAll");
             return new R(true, movieListMysql);
         }
 
-//       return new R(true,movieService.list());
     }
 
     /**
@@ -66,7 +69,10 @@ public class MovieController {
      */
     @GetMapping("{id}")
     public R getById(@PathVariable Integer id){
+        //直接使用mysql
 //        return new R(true,movieService.getById(id));
+
+        //使用mysql+redis
         String oneMovieInfoRedis = stringRedisTemplate.opsForValue().get("Movie_movieId:"+id.toString());
         if (StrUtil.isNotBlank(oneMovieInfoRedis)){
             System.out.println("请求了redis--------------------Movie-getById");
@@ -107,9 +113,11 @@ public class MovieController {
      */
     @GetMapping("/movie_cinema_schedule/{movieId}")
     public  R getMovie_Cinema_Schedule(@PathVariable Integer movieId){
+        //直接使用mysql
 //        System.out.println("请求了“影片-影院-安排“请求");
 //        return new R(true, movieService.getMovie_Cinema_Schedule(movieId));
 
+        //使用mysql+redis
         String movie_cinema_schedule = stringRedisTemplate.opsForValue().get("Movie_movie_cinema_schedule:"+movieId.toString());
         if (movie_cinema_schedule != null){
             System.out.println("请求了redis--------------------------getMovie_Cinema_Schedule");
@@ -121,7 +129,7 @@ public class MovieController {
                 return null;
             }
             //将数据存入redis
-            stringRedisTemplate.opsForValue().set("Movie_movie_cinema_schedule:"+movieId, JSONUtil.toJsonStr(movie_cinema_schedule1), 30, TimeUnit.MINUTES);
+            stringRedisTemplate.opsForValue().set("Movie_movie_cinema_schedule:"+movieId, JSONUtil.toJsonStr(movie_cinema_schedule1), 2, TimeUnit.MINUTES);
             System.out.println("请求了mysql--------------------------getMovie_Cinema_Schedule");
             return new R(true,movie_cinema_schedule1);
         }
@@ -132,9 +140,11 @@ public class MovieController {
      */
     @GetMapping("/movie_types/{movieTypes}")
     public R getMovie_Types(@PathVariable String movieTypes){
+        //直接使用mysql
 //        System.out.println("根据类型查询影片   模糊查询");
 //        return new R(true, movieService.getMovieByType(movieTypes));
 
+        //使用mysql+redis
         String Movie_Types =  stringRedisTemplate.opsForValue().get("Movie_Types:"+movieTypes);
         if (Movie_Types != null){
             System.out.println("请求了redis---------------------------Movie-getMovie_Types");
@@ -146,7 +156,7 @@ public class MovieController {
                 return null;
             }
             //将数据存入redis
-            stringRedisTemplate.opsForValue().set("Movie_Types:"+movieTypes, JSONUtil.toJsonStr(movieByType), 5, TimeUnit.MINUTES);
+            stringRedisTemplate.opsForValue().set("Movie_Types:"+movieTypes, JSONUtil.toJsonStr(movieByType), 2, TimeUnit.MINUTES);
             System.out.println("请求了mysql---------------------------Movie-getMovie_Types");
             return new R(true,movieByType);
         }

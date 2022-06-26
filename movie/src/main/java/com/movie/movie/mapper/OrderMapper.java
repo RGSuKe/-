@@ -22,7 +22,7 @@ import java.util.List;
 public interface OrderMapper extends BaseMapper<Order1> {
 
 
-    @Select("select order1.order_id, USER.username, SCHEDULE.schedule_id, cinema.cinema_name, movie.movie_name, SCHEDULE.schedule_begintime, SCHEDULE.schedule_endtime,\n" +
+    @Select("select order1.order_id, USER.user_id, USER.username, SCHEDULE.schedule_id, cinema.cinema_name, movie.movie_name, SCHEDULE.schedule_begintime, SCHEDULE.schedule_endtime,\n" +
             "seat.seat_id, seat.seat_row, seat.seat_col, seat.seat_status, order1.order_price, order1.order_createtime, order1.order_status \n" +
             "FROM USER, order1, SCHEDULE, seat, movie, cinema \n" +
             "WHERE\n" +
@@ -48,4 +48,18 @@ public interface OrderMapper extends BaseMapper<Order1> {
             "\tSCHEDULE.schedule_id = order1.schedule_id \n" +
             "\tAND movie.movie_id = SCHEDULE.movie_id")
     List<OrderVo2> selectPriceByScheduleAndMovie();
+
+
+//改改select第一个方法就行
+    @Select("select order1.order_id, USER.username, SCHEDULE.schedule_id, cinema.cinema_name, movie.movie_name, SCHEDULE.schedule_begintime, SCHEDULE.schedule_endtime,\n" +
+            "seat.seat_id, seat.seat_row, seat.seat_col, seat.seat_status, order1.order_price, order1.order_createtime, order1.order_status \n" +
+            "FROM USER, order1, SCHEDULE, seat, movie, cinema \n" +
+            "WHERE\n" +
+            "\torder1.user_id = #{userId}\n"+
+            "\tAND order1.user_id = USER.user_id \n" +
+            "\tAND order1.schedule_id = SCHEDULE.schedule_id \n" +
+            "\tAND order1.seat_id = seat.seat_id \n" +
+            "\tAND SCHEDULE.movie_id = movie.movie_id \n" +
+            "\tAND cinema.cinema_id = SCHEDULE.cinema_id \n")
+    List<OrderVo2> selectMyOrder(Integer userId);
 }
