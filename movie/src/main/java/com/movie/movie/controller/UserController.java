@@ -1,15 +1,26 @@
 package com.movie.movie.controller;
 
+import cn.hutool.core.lang.TypeReference;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONUtil;
+import com.alibaba.fastjson.JSON;
 import com.movie.movie.controller.util.R;
 import com.movie.movie.entity.User;
+import com.movie.movie.entity.ViewObject.Cinema_Movie_Schedule;
 import com.movie.movie.entity.ViewObject.UserDTO;
 import com.movie.movie.service.IUserService;
+import com.movie.movie.utils.SendEmail;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 /**
  * <p>
@@ -26,6 +37,12 @@ public class UserController {
     @Autowired
     private IUserService userService;
 
+    @Autowired
+    private SendEmail sendEmail;
+
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
+
     /**
      * 插入一条用户信息--注册
      */
@@ -41,6 +58,45 @@ public class UserController {
 
     }
 
+    /**
+     * 发送邮箱
+     */
+    @GetMapping("/getEmailCode/{email}")
+    public R getEmailCode(@PathVariable String email){
+        System.out.println(email);
+        Boolean username = userService.getUsernameEmail(email);
+        if (username){
+            return new R(false, null, "改邮箱已被绑定，请换一个邮箱再发送！");
+        }else{
+            String name = "email:"+email+"_code:";
+            String code = sendEmail.sendEmail(email);
+            stringRedisTemplate.opsForValue().set(name, JSONUtil.toJsonStr(code), 2, TimeUnit.MINUTES);
+            return new R(true, code);
+        }
+
+    }
+
+    /**
+     * 邮箱注册
+     */
+    @PostMapping("/addOneByEmial/{email}/{code}")
+    public R emailRegister(@PathVariable String email, @PathVariable String code){
+        String codeRedis = stringRedisTemplate.opsForValue().get("email:"+email+"_code:");
+        if(StrUtil.isNotBlank(codeRedis)){
+           String code1 = JSON.parseObject(codeRedis, String.class);
+            if (code.equals(code1)){
+                User user = new User();
+                user.setUsername(email);
+                user.setEmail(email);
+                user.setPassword(email);
+                user.setPhone(null);
+                userService.save(user);
+                return new R(true, "注册成功");
+            }
+        }
+        return new R(false, "验证码已过期或者错误");
+
+    }
 
     /**
      * 登录+token
