@@ -11,12 +11,10 @@ spring:
     jackson:
         date-format: yyyy-MM--dd HH:mm:ss
         time-zone: GMT+8
-
     #解决springboot和swagger版本不兼容
     mvc:
       pathmatch:
           matching-strategy: ANT_PATH_MATCHER
-
     redis:
         database: 1
         host: 192.168.1.103
@@ -29,14 +27,34 @@ spring:
 #                min-idle: 1
 #                max-wait: -1
 
-        lettuce:
-            pool:
-                max-active: 10
-                max-idle: 10
-                min-idle: 1
-                time-between-eviction-runs: 10s
+#        lettuce:
+#            pool:
+#                max-active: 10
+#                max-idle: 10
+#                min-idle: 1
+#                time-between-eviction-runs: 10s
         jackson:
             default-property-inclusion: non_null # JSON处理时忽略非空字段
+    mail:
+        # smtp服务主机  qq邮箱则为smtp.qq.com
+        host: smtp.qq.com
+        # 服务协议 smtp为发送邮件
+        protocol: smtp
+        # 编码集
+        default-encoding: UTF-8
+        # 发送邮件的账户
+        username: 2388725739@qq.com
+        # 授权码邮箱服务器提供的授权码，不是你邮箱的密码
+        password: bmdiroabqgaqeajd
+        # 开启⼀些权限
+        test-connection: true
+        properties:
+            mail:
+                smtp:
+                    auth: true
+                    starttls:
+                        enable: true
+                        required: true
 
 mybatis-plus:
     configuration:
@@ -48,3 +66,4 @@ mybatis-plus:
             id-type: auto
 
     mapper-locations: classpath:mapper/*Mapper.xml
+    # pagehelper
