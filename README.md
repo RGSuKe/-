@@ -1,3 +1,2 @@
 # graduation-project
-毕业设计-SpringBo
 SpringBoot,MyBatisPlus,Token,Vue3,Axios....
